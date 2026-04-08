@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>about</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+
+        <section class="about-section">
+
+            <div class="about-container">
+
+                <h1>About SpikeCenter</h1>
+
+                <p>
+                    SpikeCenter is an educational platform designed to provide structured study materials,
+                    notes, and resources across subjects like Chemistry, Mathematics, Mechanics, and Python.
+                </p>
+
+
+
+                <p>
+                    Built for students, this platform offers easy access to notes, PDFs and exam materials.
+                </p>
+
+                <div class="about-highlights">
+                    <div class="highlight-card">📚 Organized Notes</div>
+                    <div class="highlight-card">⚡ Fast Access</div>
+                    <div class="highlight-card">🎯 Exam Focused</div>
+                    <div class="highlight-card">🚀 Growing Platform</div>
+                </div>
+
+                <p class="creator">
+                    Developed by <strong>Adarsh</strong>
+                </p>
+                <section class="feedback-section">
+
+                    <h2>Send Your Feedback</h2>
+
+                    <form class="feedback-form">
+
+                        <input type="text" id="name" placeholder="Your Name" required>
+
+                        <input type="email" id="email" placeholder="Your Email" required>
+
+                        <textarea id="message" placeholder="Write your feedback..." rows="5" required></textarea>
+
+                        <button type="submit">Submit</button>
+
+                    </form>
+
+                </section>
+            </div>
+
+        </section>
+    </main>
+    <script>
+        console.log("JS LOADED");
+
+        document.querySelector(".feedback-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            console.log("FORM SUBMITTED");
+
+            const data = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                message: document.getElementById("message").value
+            };
+
+            console.log("DATA:", data);
+
+            fetch("http://localhost:5000/feedback", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.text())
+                .then(msg => {
+                    console.log("RESPONSE:", msg);
+                    alert("Feedback Sent!");
+                })
+                .catch(err => {
+                    console.log("ERROR:", err);
+                });
+        });
+    </script>
+</body>
+
+</html>
